@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+import ImagePreview from './ImagePreview';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [dataUri, setDataUri] = useState('');
+
+	const onCapture = (dataUri) => {
+		setDataUri(dataUri);
+	};
+
+	return <div className='App'>{dataUri ? <ImagePreview dataUri={dataUri} /> : <Camera onTakePhoto={onCapture} />}</div>;
 }
 
 export default App;
